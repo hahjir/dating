@@ -1,0 +1,11 @@
+a.btn-primary {
+    background-color: darkred;
+    border-color: red;
+    color: white !important;
+    margin-top: 0.3em;
+}
+
+a:hover{
+    background-color: #4b0909 !important;
+    border-color: #9d1717 !important;
+}
