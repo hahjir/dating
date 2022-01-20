@@ -1,0 +1,14 @@
+{
+  "name": "halsamac/328/dating",
+  "description": "My Dating Project",
+  "license": "open source",
+  "authors": [
+    {
+      "name": "Hahjir Al-samach",
+      "email": "al-samach.hahjir@student.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
