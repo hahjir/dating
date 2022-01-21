@@ -5,3 +5,20 @@ a.btn-primary {
     margin-top: 0.3em;
 }
 
+.main {
+    border: 1px solid lightgray;
+    width: 85%;
+    margin: 0px auto;
+    padding: 1rem;
+}
+
+#intro h2, #intro h4, #buttondiv {
+    text-align: center;
+}
+
+
+
+
+
+
+
