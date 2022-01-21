@@ -5,7 +5,6 @@ a.btn-primary {
     margin-top: 0.3em;
 }
 
-a:hover{
-    background-color: #4b0909 !important;
-    border-color: #9d1717 !important;
+h1{
+    background-color: white;
 }
