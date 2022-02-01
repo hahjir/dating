@@ -1,6 +1,12 @@
+/*
+Hahjir Al-samach
+January 20, 2022
+Styles
+ */
+
 a.btn-primary {
-    background-color: darkred;
-    border-color: red;
+    background-color: blue;
+    border-color: blue;
     color: white !important;
     margin-top: 0.3em;
 }
@@ -14,6 +20,19 @@ a.btn-primary {
 
 #intro h2, #intro h4, #buttondiv {
     text-align: center;
+}
+
+#info {
+    border: solid 1px black;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: lightgrey;
+    padding: 15px;
+}
+
+.image {
+    width: 40%;
 }
 
 
