@@ -1,6 +1,6 @@
 <!-- Hahjir Al-samach
 January 20, 2022
-A dating site -->
+home.html -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,12 +12,12 @@ A dating site -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/styles.css">
 
-<title>My Dating Website</title>
+<title>Home</title>
 </head>
 <body>
 <nav class="navbar bg-light navbar-light">
     <div class="navbar-nav">
-        <a class="nav-item nav-link" >My Dating Website</a>
+        <a href="{{ @BASE }}" class="nav-item nav-link" >My Dating Website</a>
     </div>
 </nav>
 
@@ -48,7 +48,7 @@ A dating site -->
             </p>
             <hr>
             <div id="buttondiv">
-                <a class="btn btn-primary">Create a Profile!</a>
+                <a href="personal" class="btn btn-primary">Create a Profile!</a>
             </div>
         </div>
         <div class="col-sm-6">
