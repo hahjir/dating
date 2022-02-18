@@ -33,19 +33,32 @@ personalInfo.html-->
                     <div class="form-group">
                         <label for="first-name"><strong>First Name</strong>
                         </label>
-                        <input name="first-name" type="text" class="form-control" id="first-name">
+                        <input name="first-name" type="text" class="form-control" id="first-name" value="{{ @first }}">
+
+
+                        <check if="{{ isset(@errors['first-name']) }}">
+                            <span class="err"> {{ @errors['first-name'] }}</span>
+                        </check>
                     </div>
 
                     <div class="form-group">
                         <label for="last-name"><strong>Last Name</strong>
                         </label>
-                        <input name="last-name" type="text" class="form-control" id="last-name">
+                        <input name="last-name" type="text" class="form-control" id="last-name" value="{{ @last }}">
+
+                        <check if="{{ isset(@errors['last-name']) }}">
+                            <span class="err"> {{ @errors['last-name'] }}</span>
+                        </check>
                     </div>
 
                     <div class="form-group">
                         <label for="age"><strong>Age</strong>
                         </label>
-                        <input name="age" type="text" class="form-control" id="age">
+                        <input name="age" type="text" class="form-control" id="age" value="{{ @age }}">
+
+                        <check if="{{ isset(@errors['age']) }}">
+                            <span class="err"> {{ @errors['age'] }}</span>
+                        </check>
                     </div>
 
                     <label><strong>Gender</strong>
@@ -73,17 +86,20 @@ personalInfo.html-->
                         <label for="phone"><strong>Phone Number</strong>
 
                         </label>
-                        <input name="phone" type="text" class="form-control"
-                               id="phone">
+                        <input name="phone" type="text" class="form-control" id="phone" value="{{ @phone }}">
+                        <check if="{{ isset(@errors['phone']) }}">
+                            <span class="err"> {{ @errors['phone'] }}</span>
+                        </check>
+
                     </div>
                     <br>
                 </div>
                 <div class="col col-4 form-check">
-                <p id="info">
-                    <strong>Note:</strong> All information entered is
-                    protected by our <a href="#">privacy policy</a>.<br> Profile
-                    information can only be viewed by others with your permission.
-                </p>
+                    <p id="info">
+                        <strong>Note:</strong> All information entered is
+                        protected by our <a href="#">privacy policy</a>.<br> Profile
+                        information can only be viewed by others with your permission.
+                    </p>
                 </div>
 
                 <div class="d-flex flex-row-reverse">
