@@ -29,8 +29,24 @@ interests.html-->
             <label><strong>In-door interests</strong></label>
             <br>
             <div class="col-form-label row">
-                <div class="col col-3 form-check">
-                    <input type="checkbox" id="tv" name="interests[]" value="tv">
+                   <repeat group="{{ @userIndoors }}" value="{{ @indoor }}">
+                       <div class="col col-3 form-check">
+                        <label><input type="checkbox" name="indoor[]" value="{{ @indoor }}"
+                            <check if="{{ isset(@SESSION['userIndoors']) && in_array(@indoor, @interest) }}">
+                                checked
+                            </check>>
+                            {{ @indoor }}</label><br>
+                       </div>
+                    </repeat>
+
+
+                    <check if="{{ isset(@errors['indoor']) }}">
+                        <span class="err">{{ @errors['indoor'] }}</span>
+                    </check>
+
+
+
+                   <!-- <input type="checkbox" id="tv" name="interests[]" value="tv">
                     <label for="tv">tv</label></div>
                 <div class="col col-3 form-check">
                     <input type="checkbox" id="movies" name="interests[]" value="movies">
@@ -61,34 +77,49 @@ interests.html-->
                 </div>
 
             </div>
+            -->
+
         <br>
         <label><strong>Out-door interests</strong></label>
         <br>
         <div class="col-form-label row">
-            <div class="col col-3 form-check">
-                <input type="checkbox" id="hiking" name="interests[]" value="hiking">
+                <repeat group="{{ @userOutdoors }}" value="{{ @outdoor }}">
+                    <div class="col col-3 form-check">
+                        <label><input type="checkbox" name="outdoor[]" value="{{ @outdoor }}">
+                            {{ @outdoor }}</label>
+                    </div>
+                </repeat>
+
+                <check if="{{ isset(@errors['outdoor']) }}">
+                    <span class="err">{{ @errors['outdoor'] }}</span>
+                </check>
+
+               <!-- <input type="checkbox" id="hiking" name="outdoor[]" value="hiking">
                 <label for="hiking">hiking</label></div>
             <div class="col col-3 form-check">
-                <input type="checkbox" id="biking" name="interests[]" value="biking">
+                <input type="checkbox" id="biking" name="outdoor[]" value="biking">
                 <label for="biking">biking</label></div>
             <div class="col col-3 form-check">
-                <input type="checkbox" id="swimming" name="interests[]" value="swimming">
+                <input type="checkbox" id="swimming" name="outdoor[]" value="swimming">
                 <label for="swimming">swimming</label></div>
             <div class="col col-3 form-check">
-                <input type="checkbox" id="collecting" name="interests[]" value="collecting">
+                <input type="checkbox" id="collecting" name="outdoor[]" value="collecting">
                 <label for="collecting">collecting</label></div>
             <div class="col col-3 form-check">
-                <input type="checkbox" id="walking" name="interests[]" value="walking">
+                <input type="checkbox" id="walking" name="outdoor[]" value="walking">
                 <label for="walking">walking</label></div>
             <div class="col col-3 form-check">
-                <input type="checkbox" id="climbing" name="interests[]" value="climbing">
+                <input type="checkbox" id="climbing" name="outdoor[]" value="climbing">
                 <label for="climbing">climbing</label></div>
         </div>
+        -->
         <div class="d-flex flex-row-reverse">
             <div class="p-2">
                 <button type="submit" class="btn btn-primary">Next ></button>
             </div>
         </div>
+            </div>
+</div>
         </form>
     </div>
 </div>
