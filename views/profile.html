@@ -31,7 +31,11 @@ profile.html-->
                     <div class="form-group">
                         <label for="email"><strong>Email</strong>
                         </label>
-                        <input name="email" type="text" class="form-control" id="email">
+                        <input name="email" type="text" class="form-control" id="email" value="{{ @email }}">
+
+                        <check if="{{ isset(@errors['email']) }}">
+                            <span class="err"> {{ @errors['email'] }}</span>
+                        </check>
                     </div>
                     <br>
                     <div class="form-group">
