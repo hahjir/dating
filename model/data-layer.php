@@ -1,13 +1,17 @@
 <?php
 
-
-function indoorInterests()
+class DataLayer
 {
-    return array('tv', 'movies', 'cooking', 'board games', 'puzzles', 'reading', 'playing cards', 'video games');
+    function indoorInterests()
+    {
+        return array('tv', 'movies', 'cooking', 'board games', 'puzzles', 'reading', 'playing cards', 'video games');
+    }
+
+
+    function outdoorInterests()
+    {
+        return array('hiking', 'biking', 'swimming', 'collecting', 'walking', 'climbing');
+    }
 }
 
 
-function outdoorInterests()
-{
-    return array('hiking', 'biking', 'swimming', 'collecting', 'walking', 'climbing');
-}
