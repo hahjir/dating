@@ -82,24 +82,34 @@ personalInfo.html-->
                                    name="gender" value="Non"> Non-binary
                         </label>
                     </div>
+                    <check if="{{ isset(@errors['gender']) }}">
+                        <span class="err"> {{ @errors['gender'] }}</span>
+                    </check>
                     <div class="form-group">
                         <label for="phone"><strong>Phone Number</strong>
-
                         </label>
                         <input name="phone" type="text" class="form-control" id="phone" value="{{ @phone }}">
                         <check if="{{ isset(@errors['phone']) }}">
                             <span class="err"> {{ @errors['phone'] }}</span>
                         </check>
-
                     </div>
                     <br>
                 </div>
+
+
                 <div class="col col-4 form-check">
                     <p id="info">
                         <strong>Note:</strong> All information entered is
                         protected by our <a href="#">privacy policy</a>.<br> Profile
                         information can only be viewed by others with your permission.
                     </p>
+                </div>
+                <span><strong>Premium Membership</strong></span>
+                <div class="form-check form-group mt-1">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="premium" id="premium" name="premium">
+                        Sign me up for a Premium Account!
+                    </label>
                 </div>
 
                 <div class="d-flex flex-row-reverse">
@@ -127,4 +137,3 @@ personalInfo.html-->
 
 </body>
 </html>
-
