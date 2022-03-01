@@ -30,28 +30,28 @@ summary.html-->
                     <table class="table">
                         <tbody>
                         <tr>
-                            <td>Name: {{ @SESSION.name }}  </td>
+                            <td>Name: {{ @SESSION.name->getName() }}  </td>
                         </tr>
                         <tr>
-                            <td>Gender: {{ @SESSION.gender }}</td>
+                            <td>Gender: {{ @SESSION.gender->getGender() }}</td>
                         </tr>
                         <tr>
-                            <td>Age: {{ @SESSION.age }}</td>
+                            <td>Age: {{ @SESSION.age->getAge() }}</td>
                         </tr>
                         <tr>
-                            <td>Phone: {{ @SESSION.phone }}</td>
+                            <td>Phone: {{ @SESSION.phone->getPhone() }}</td>
                         </tr>
                         <tr>
-                            <td>Email: {{ @SESSION.email }}</td>
+                            <td>Email: {{ @SESSION.email->getEmail() }}</td>
                         </tr>
                         <tr>
-                            <td>State: {{ @SESSION.state }}</td>
+                            <td>State: {{ @SESSION.state->getState() }}</td>
                         </tr>
                         <tr>
-                            <td>Seeking: {{ @SESSION.seeking }}</td>
+                            <td>Seeking: {{ @SESSION.seeking->getSeeking() }}</td>
                         </tr>
                         <tr>
-                            <td>Interests: {{ @SESSION.interests }}</td>
+                            <td>Interests: {{ @SESSION.interests->getInterests() }}</td>
                         </tr>
                         </tbody>
                     </table>
