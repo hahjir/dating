@@ -15,7 +15,7 @@ session_start();
 //var_dump($_SESSION);
 
 $f3 = Base::instance();
-$con = new Controller($f3);
+$con = new Control($f3);
 
 
 //require('model/data-layer.php');
@@ -42,7 +42,6 @@ $f3->route('GET|POST /interests', function ($f3) {
 });
 
 $f3->route('GET /summary', function () {
-
     $GLOBALS['con']->summary();
 
     // clear the session data
