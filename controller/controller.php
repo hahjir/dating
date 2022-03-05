@@ -1,6 +1,6 @@
 <?php
 
-class Controller
+class Control
 {
     private $_f3; //F3 object
 
@@ -19,58 +19,89 @@ class Controller
 
     function personal()
     {
+        $_SESSION = array();
+
         $first = "";
         $last = "";
         $age = "";
         $phone = "";
-        $gender = "";
+
 
         //if the form has been posted
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            if (isset($_POST['premium'])) {
+                $member = new PremiumMember();
+            } else {
+                $member = new Member();
+            }
+
             $first = $_POST['first-name'];
             $last = $_POST['last-name'];
             $age = $_POST['age'];
             $phone = $_POST['phone'];
-            $gender = $_POST['gender'];
 
-            if (validName($first)) {
+
+
+            if (Validation::validName($first)) {
+                $member->setFirst($_POST['first-name']);
+                /*
                 $_SESSION['name'] = $_POST['first-name'];
                 $_SESSION['first-name'] = $_POST['first-name'];
+                */
+
 
             } else {
                 $this->_f3->set('errors["first-name"]', 'Please enter first name');
             }
 
 
-            if (validName($last)) {
+            if (Validation::validName($last)) {
+                $member->setLast($_POST['last-name']);
+                /*
                 $_SESSION['name'] .= " " . $_POST['last-name'];
                 $_SESSION['last-name'] = $_POST['last-name'];
+                */
+
             } else {
                 $this->_f3->set('errors["last-name"]', 'Please enter last name');
             }
 
-            if (Validator::validAge($age)) {
-                $_SESSION['age'] = $_POST['age'];
+            if (Validation::validAge($age)) {
+                $member->setAge($_POST['age']);
+                /*
+                  $_SESSION['age'] = $_POST['age'];
+                */
+
+
             } else {
                 $this->_f3->set('errors["age"]', 'Please enter age between 18 and 118');
             }
 
-            if (Validator::validPhone($phone)) {
+            if (Validation::validPhone($phone)) {
+                $member->setPhone($_POST['phone']);
+                /*
                 $_SESSION['phone'] = $_POST['phone'];
+                */
+
+
             } else {
                 $this->_f3->set('errors["phone"]', 'Please enter a valid phone number');
             }
 
-            if (Validator::validAge($gender)) {
-                $_SESSION['gender'] = $_POST['gender'];
+            /*
+            if (Validation::validGender($gender)) {
+                $_SESSION['gender']->setGender($gender);
             } else {
                 $this->_f3->set('errors["gender"]', 'Please enter gender');
             }
+             */
 
-            // $_SESSION['gender'] = $_POST['gender'];
+            $member->setGender($_POST['gender']);
 
 
             if (empty($this->_f3->get('errors'))) {
+                $_SESSION['member'] = $member;
                 $this->_f3->reroute('profile');
             }
         }
@@ -79,7 +110,7 @@ class Controller
         $this->_f3->set('last', $last);
         $this->_f3->set('age', $age);
         $this->_f3->set('phone', $phone);
-        $this->_f3->set('gender', $gender);
+
 
         $view = new Template();
         echo $view->render('views/personalInfo.html');
@@ -88,19 +119,27 @@ class Controller
     function profile()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (Validator::validEmail($_POST['email'])) {
-                $_SESSION['email'] = $_POST['email'];
+            $member = $_SESSION['member'];
+            if (Validation::validEmail($_POST['email'])) {
+                $member->setEmail($_POST['email']);
             } else {
                 $this->_f3->set('errors["email"]', 'Please enter a valid email');
             }
 
-            $_SESSION['state'] = $_POST['state'];
-            $_SESSION['seeking'] = $_POST['seeking'];
-            $_SESSION['biography'] = $_POST['biography'];
+
+            $member->setState($_POST['state']);
+            $member->setSeeking($_POST['seeking']);
+            $member->setBio($_POST['biography']);
+
 
             //redirect user to next page
             if (empty($this->_f3->get('errors'))) {
-                $this->_f3->reroute('interests');
+                $_SESSION['member'] = $member;
+                if ($member instanceof PremiumMember) {
+                    $this->_f3->reroute('interests');
+                } else {
+                    $this->_f3->reroute('summary');
+                }
             }
         }
 
@@ -113,11 +152,16 @@ class Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // $interest = $_POST['interests'];
+            $member = $_SESSION['member'];
 
             if (!empty($_POST['indoor'])) {
 
-                if (Validator::validIndoor($_POST['indoor'])) {
+                if (Validation::validIndoor($_POST['indoor'])) {
+                    $indoor = (implode(" , ", $_POST['indoor']));
+                    $member->setIndoorInterest($indoor);
+                    /*
                     $_SESSION['indoor'] = $_POST['indoor'];
+                    */
                 } else {
                     $this->_f3->set('errors["indoor"]', 'Please enter a valid indoor interest');
                 }
@@ -125,8 +169,11 @@ class Controller
 
             if (!empty($_POST['outdoor'])) {
 
-                if (Validator::validOutdoor($_POST['outdoor'])) {
+                if (Validation::validOutdoor($_POST['outdoor'])) {
+                    $member->setOutdoorInterest(implode(" , ", $_POST['outdoor']));
+                    /*
                     $_SESSION['outdoor'] = $_POST['outdoor'];
+                    */
                 } else {
                     $this->_f3->set('errors["outdoor"]', 'Please enter a valid outdoor interest');
                 }
@@ -134,24 +181,7 @@ class Controller
 
 
             if (empty($this->_f3->get('errors'))) {
-                if (!empty($_SESSION['indoor']) and !empty($_SESSION['outdoor'])) {
 
-                    $_SESSION['combined'] = array_merge($_SESSION['outdoor'], $_SESSION['indoor']);
-
-                    $_SESSION['interests'] = implode(", ", $_SESSION['combined']);
-
-
-                } else if (!empty ($_SESSION['indoor'])) {
-                    $_SESSION['interests'] = implode(" , ", $_SESSION['indoor']);
-
-
-                } else if (!empty ($_SESSION['outdoor'])) {
-                    $_SESSION['interests'] = implode(" , ", $_SESSION['outdoor']);
-
-
-                } else {
-                    $_SESSION['interests'] = "None selected";
-                }
                 $this->_f3->reroute('summary');
             }
         }
@@ -169,8 +199,6 @@ class Controller
         $view = new Template();
         echo $view->render('views/summary.html');
 
-        //Clear the session data
-        session_destroy();
     }
 
 }
