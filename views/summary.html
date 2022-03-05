@@ -30,29 +30,35 @@ summary.html-->
                     <table class="table">
                         <tbody>
                         <tr>
-                            <td>Name: {{ @SESSION.name->getName() }}  </td>
+                            <td>Name: {{ @SESSION.member->getFirst()  }} {{ @SESSION.member->getLast()  }}</td>
+                        <tr>
+                            <td>Gender: {{ @SESSION.member->getGender() }}</td>
                         </tr>
                         <tr>
-                            <td>Gender: {{ @SESSION.gender->getGender() }}</td>
+                            <td>Age: {{ @SESSION.member->getAge() }}</td>
                         </tr>
                         <tr>
-                            <td>Age: {{ @SESSION.age->getAge() }}</td>
+                            <td>Phone: {{ @SESSION.member->getPhone() }}</td>
                         </tr>
                         <tr>
-                            <td>Phone: {{ @SESSION.phone->getPhone() }}</td>
+                            <td>Email: {{ @SESSION.member->getEmail() }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>State: {{ @SESSION.member->getState() }}</td>
                         </tr>
                         <tr>
-                            <td>Email: {{ @SESSION.email->getEmail() }}</td>
+                            <td>Seeking: {{ @SESSION.member->getSeeking() }}</td>
+                        </tr>
+
+                        <check if = "{{get_class(@SESSION.member) == 'PremiumMember'}}" >
+                        <tr>
+                            <td>Indoor Interests: {{ @SESSION.member->getIndoorInterests() }}</td>
                         </tr>
                         <tr>
-                            <td>State: {{ @SESSION.state->getState() }}</td>
+                            <td>Outdoor Interests: {{ @SESSION.member->getOutdoorInterests() }} </td>
                         </tr>
-                        <tr>
-                            <td>Seeking: {{ @SESSION.seeking->getSeeking() }}</td>
-                        </tr>
-                        <tr>
-                            <td>Interests: {{ @SESSION.interests->getInterests() }}</td>
-                        </tr>
+                        </check>
                         </tbody>
                     </table>
                 </div>
@@ -63,7 +69,7 @@ summary.html-->
                 </div>
                 <label>Biography:
                     <br>
-                    {{ @SESSION.biography }}</label>
+                    {{ @SESSION.member->getBio() }}</label>
             </div>
         </div>
 
