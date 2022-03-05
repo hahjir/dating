@@ -35,6 +35,7 @@ class Member
 
 
     /**
+     * Sets first name
      * @param string $first
      */
     public function setFirst(string $first): void
@@ -43,6 +44,7 @@ class Member
     }
 
     /**
+     * Gets first name
      * @return string
      */
     public function getFirst(): string
@@ -52,6 +54,7 @@ class Member
 
 
     /**
+     * Sets last name
      * @param string $last
      */
     public function setLast(string $last): void
@@ -62,6 +65,7 @@ class Member
 
 
     /**
+     * Gets last name
      * @return string
      */
     public function getLast(): string
@@ -71,6 +75,7 @@ class Member
 
 
     /**
+     * Sets age
      * @param int $age
      */
     public function setAge(int $age): void
@@ -80,6 +85,7 @@ class Member
 
 
     /**
+     * Gets age
      * @return int
      */
     public function getAge(): int
@@ -89,6 +95,7 @@ class Member
 
 
     /**
+     * Sets gender
      * @param string $gender
      */
     public function setGender(string $gender): void
@@ -98,6 +105,7 @@ class Member
 
 
     /**
+     * Gets gender
      * @return string
      */
     public function getGender(): string
@@ -107,6 +115,7 @@ class Member
 
 
     /**
+     * Sets phone number
      * @param string $phone
      */
     public function setPhone(string $phone): void
@@ -116,6 +125,7 @@ class Member
 
 
     /**
+     * gets phone number
      * @return string
      */
     public function getPhone(): string
@@ -125,6 +135,7 @@ class Member
 
 
     /**
+     * Sets email
      * @param string $email
      */
     public function setEmail(string $email): void
@@ -134,6 +145,7 @@ class Member
 
 
     /**
+     * Gets email
      * @return string
      */
     public function getEmail(): string
@@ -144,6 +156,7 @@ class Member
 
 
     /**
+     * Sets state
      * @param string $state
      */
 
@@ -154,6 +167,7 @@ class Member
 
 
    /**
+    * Gets state
     * @return string
     */
 
@@ -166,6 +180,7 @@ class Member
 
 
     /**
+     * Sets seeking
      * @param string $seeking
      */
 
@@ -177,6 +192,7 @@ class Member
 
 
    /**
+    * Gets seeking
     * @return string
     */
 
@@ -187,6 +203,7 @@ class Member
 
 
     /**
+     * Sets bio
      * @param string $bio
      */
     public function setBio(string $bio): void
@@ -195,6 +212,7 @@ class Member
     }
 
     /**
+     * Gets bio
      * @return string
      */
     public function getBio(): string
