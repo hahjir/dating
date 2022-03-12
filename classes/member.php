@@ -14,6 +14,9 @@ class Member
     private $_state;
     private $_seeking;
     private $_bio;
+    /*
+     private $_member;
+     */
 
 
     /**
@@ -23,13 +26,20 @@ class Member
      * @param string $_gender
      * @param string $_phone
      */
-    public function __construct($first = "", $last = "", $age = "", $gender = "", $phone = "")
+    public function __construct($first = "", $last = "", $age = "", $gender = "", $phone = "", $email="", $state="", $seeking="", $bio="")
     {
         $this->_first = $first;
         $this->_last = $last;
         $this->_age = $age;
         $this->_gender = $gender;
         $this->_phone = $phone;
+        $this->_email = $email;
+        $this->_state = $state;
+        $this->_seeking = $seeking;
+        $this->_bio = $bio;
+        /*
+          $this->_member = $_member;
+         */
 
     }
 
@@ -102,6 +112,7 @@ class Member
     {
         $this->_gender = $gender;
     }
+
 
 
     /**
@@ -221,6 +232,12 @@ class Member
     }
 
 
+    /*
+    public function isMember(): bool
+    {
+        return $this->_member;
+    }
+    */
 
 
 }
