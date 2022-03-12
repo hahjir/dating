@@ -1,6 +1,8 @@
 <?php
 
-class Control
+
+
+class Controller
 {
     private $_f3; //F3 object
 
@@ -19,37 +21,34 @@ class Control
 
     function personal()
     {
-        $_SESSION = array();
 
         $first = "";
         $last = "";
         $age = "";
         $phone = "";
+        $gender = "";
 
 
         //if the form has been posted
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if (isset($_POST['premium'])) {
-                $member = new PremiumMember();
+                $_SESSION['member'] = new PremiumMember();
             } else {
-                $member = new Member();
+                $_SESSION['member'] = new Member();
             }
+
 
             $first = $_POST['first-name'];
             $last = $_POST['last-name'];
             $age = $_POST['age'];
             $phone = $_POST['phone'];
+            $gender = $_POST['gender'];
 
 
 
             if (Validation::validName($first)) {
-                $member->setFirst($_POST['first-name']);
-                /*
-                $_SESSION['name'] = $_POST['first-name'];
-                $_SESSION['first-name'] = $_POST['first-name'];
-                */
-
+                $_SESSION['member']->setFirst($_POST['first-name']);
 
             } else {
                 $this->_f3->set('errors["first-name"]', 'Please enter first name');
@@ -57,51 +56,35 @@ class Control
 
 
             if (Validation::validName($last)) {
-                $member->setLast($_POST['last-name']);
-                /*
-                $_SESSION['name'] .= " " . $_POST['last-name'];
-                $_SESSION['last-name'] = $_POST['last-name'];
-                */
+                $_SESSION['member']->setLast($_POST['last-name']);
 
             } else {
                 $this->_f3->set('errors["last-name"]', 'Please enter last name');
             }
 
             if (Validation::validAge($age)) {
-                $member->setAge($_POST['age']);
-                /*
-                  $_SESSION['age'] = $_POST['age'];
-                */
-
+                $_SESSION['member']->setAge($_POST['age']);
 
             } else {
                 $this->_f3->set('errors["age"]', 'Please enter age between 18 and 118');
             }
 
             if (Validation::validPhone($phone)) {
-                $member->setPhone($_POST['phone']);
-                /*
-                $_SESSION['phone'] = $_POST['phone'];
-                */
-
+                $_SESSION['member']->setPhone($_POST['phone']);
 
             } else {
                 $this->_f3->set('errors["phone"]', 'Please enter a valid phone number');
             }
 
-            /*
+
             if (Validation::validGender($gender)) {
-                $_SESSION['gender']->setGender($gender);
+              $_SESSION['member']->setGender($_POST['gender']);
+
             } else {
                 $this->_f3->set('errors["gender"]', 'Please enter gender');
             }
-             */
-
-            $member->setGender($_POST['gender']);
-
 
             if (empty($this->_f3->get('errors'))) {
-                $_SESSION['member'] = $member;
                 $this->_f3->reroute('profile');
             }
         }
@@ -110,32 +93,33 @@ class Control
         $this->_f3->set('last', $last);
         $this->_f3->set('age', $age);
         $this->_f3->set('phone', $phone);
+        $this->_f3->set('gender', $gender);
 
 
         $view = new Template();
         echo $view->render('views/personalInfo.html');
     }
 
+
     function profile()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $member = $_SESSION['member'];
             if (Validation::validEmail($_POST['email'])) {
-                $member->setEmail($_POST['email']);
+                $_SESSION['member']->setEmail($_POST['email']);
             } else {
                 $this->_f3->set('errors["email"]', 'Please enter a valid email');
             }
 
+            ( isset($_POST['seeking']) ) ? $_SESSION['member']->setSeeking($_POST['seeking']) : $_SESSION['member']->setSeeking("none select ");
 
-            $member->setState($_POST['state']);
-            $member->setSeeking($_POST['seeking']);
-            $member->setBio($_POST['biography']);
+
+            $_SESSION['member']->setState($_POST['state']);
+            $_SESSION['member']->setBio($_POST['biography']);
 
 
             //redirect user to next page
             if (empty($this->_f3->get('errors'))) {
-                $_SESSION['member'] = $member;
-                if ($member instanceof PremiumMember) {
+                if ($_SESSION['member'] instanceof PremiumMember) {
                     $this->_f3->reroute('interests');
                 } else {
                     $this->_f3->reroute('summary');
@@ -152,16 +136,13 @@ class Control
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // $interest = $_POST['interests'];
-            $member = $_SESSION['member'];
+            //$member = $_SESSION['member'];
 
             if (!empty($_POST['indoor'])) {
 
                 if (Validation::validIndoor($_POST['indoor'])) {
                     $indoor = (implode(" , ", $_POST['indoor']));
-                    $member->setIndoorInterest($indoor);
-                    /*
-                    $_SESSION['indoor'] = $_POST['indoor'];
-                    */
+                    $_SESSION['member']->setIndoorInterest($indoor);
                 } else {
                     $this->_f3->set('errors["indoor"]', 'Please enter a valid indoor interest');
                 }
@@ -170,7 +151,7 @@ class Control
             if (!empty($_POST['outdoor'])) {
 
                 if (Validation::validOutdoor($_POST['outdoor'])) {
-                    $member->setOutdoorInterest(implode(" , ", $_POST['outdoor']));
+                    $_SESSION['member']->setOutdoorInterest(implode(" , ", $_POST['outdoor']));
                     /*
                     $_SESSION['outdoor'] = $_POST['outdoor'];
                     */
@@ -196,10 +177,24 @@ class Control
 
     function summary()
     {
+        $GLOBALS['dataLayer']->insertMember($_SESSION['member']);
+
         $view = new Template();
         echo $view->render('views/summary.html');
 
     }
+
+
+    function admin()
+    {
+        //Get the data from the model
+        $members = $GLOBALS['dataLayer']->getMembers();
+        $this->_f3->set('members', $members);
+
+        $view = new Template();
+        echo $view->render('views/admin.html');
+    }
+
 
 }
 
