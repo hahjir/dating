@@ -15,6 +15,13 @@ class Validation
         return $age >= 18 && $age <= 118;
     }
 
+    //validate gender
+    static function validGender($gender): bool
+    {
+        return strlen($gender) >= 1;
+    }
+
+
 //validates phone
     static function validPhone($phone): bool
     {
