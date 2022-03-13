@@ -15,37 +15,50 @@ session_start();
 //var_dump($_SESSION);
 
 $f3 = Base::instance();
-$con = new Control($f3);
-
+$con = new Controller($f3);
+$dataLayer = new DataLayer();
 
 //require('model/data-layer.php');
 //require('model/validation-function.php');
 
 
+//home page
 $f3->route('GET /', function () {
     $GLOBALS['con']->home();
 
 });
 
+
+//personal
 $f3->route('GET|POST /personal', function ($f3) {
     $GLOBALS['con']->personal();
 });
 
 
+//profile
 $f3->route('GET|POST /profile', function ($f3) {
     $GLOBALS['con']->profile();
 });
 
 
+//interests
 $f3->route('GET|POST /interests', function ($f3) {
     $GLOBALS['con']->interests();
 });
 
+//summary
 $f3->route('GET /summary', function () {
     $GLOBALS['con']->summary();
 
     // clear the session data
     session_destroy();
+});
+
+
+
+//Define an admin route
+$f3->route('GET /admin', function() {
+    $GLOBALS['con']->admin();
 });
 
 
